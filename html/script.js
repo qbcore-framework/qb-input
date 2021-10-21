@@ -71,7 +71,8 @@ const OpenMenu = (data) => {
 const renderTextInput = (item) => {
     const { text, name } = item;
     formInputs[name] = "";
-    const isRequired = item.isRequired == "true" || item.isRequired ? 'required' : '';
+    const isRequired =
+        item.isRequired == "true" || item.isRequired ? "required" : "";
 
     return ` <input placeholder="${text}" type="text" class="form-control" name="${name}" ${isRequired}/>`;
 };
@@ -80,7 +81,8 @@ const renderNumberInput = (item) => {
     try {
         const { text, name } = item;
         formInputs[name] = "";
-        const isRequired = item.isRequired == "true" || item.isRequired ? 'required' : '';
+        const isRequired =
+            item.isRequired == "true" || item.isRequired ? "required" : "";
 
         return `<input placeholder="${text}" type="number" class="form-control" name="${name}" ${isRequired}/>`;
     } catch (err) {
@@ -124,7 +126,9 @@ const renderCheckboxInput = (item) => {
 
 const renderSelectInput = (item) => {
     const { options, name, text } = item;
-    let div = `<select class="form-select" name="${name}" title="${text}">`;
+    let div = `<div class="select-title">${text}</div>`;
+
+    div += `<select class="form-select" name="${name}" title="${text}">`;
     formInputs[name] = options[0].value;
 
     options.forEach((option, index) => {
