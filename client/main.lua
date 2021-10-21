@@ -14,7 +14,7 @@ RegisterNUICallback("closeMenu", function(data, cb)
     cb("ok")
 end)
 
-function DialogInput(data)
+function ShowInput(data)
     Citizen.Wait(150)
     if not data then return end
     if properties then return end
@@ -30,4 +30,4 @@ function DialogInput(data)
     return Citizen.Await(properties)
 end
 
-exports("DialogInput", DialogInput)
+exports("ShowInput", ShowInput)
