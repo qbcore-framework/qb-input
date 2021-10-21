@@ -1,95 +1,156 @@
-var RowsData = [];
-var Rows = [];
-var saved = "";
+let formInputs = {};
 
 const OpenMenu = (data) => {
-    $(`.main-wrapper`).fadeIn(0)
-    SetHeader(data.header)
-    AddRow(data.rows)
-    SetButton(data.button)
-}
+    if (data == null || data == "") {
+        console.log("No data detected");
+        return null;
+    }
 
-function SetHeader(header) {
-    var element
-    element = $('<h1>' + header + '<h1>');
-    $('.heading').append(element);
-    saved = element
+    $(`.main-wrapper`).fadeIn(0);
+
+    let form = [
+        "<form id='qb-input-form'>",
+        `<div class="heading">${
+            data.header != null ? data.header : "Form Title"
+        }</div>`,
+    ];
+
+    data.inputs.forEach((item, index) => {
+        switch (item.type) {
+            case "text":
+                form.push(renderTextInput(item));
+                break;
+            case "number":
+                form.push(renderNumberInput(item));
+                break;
+            case "radio":
+                form.push(renderRadioInput(item));
+                break;
+            case "select":
+                form.push(renderSelectInput(item));
+                break;
+            case "checkbox":
+                form.push(renderCheckboxInput(item));
+                break;
+            default:
+                form.push(`<div>${item.text}</div>`);
+        }
+    });
+    form.push(
+        `<div class="footer"><button type="submit" class="btn btn-success" id="submit">${
+            data.submitText ? data.submitText : "Submit"
+        }</button></div>`
+    );
+
+    form.push("</form>");
+
+    $(".main-wrapper").html(form.join(" "));
+
+    $("#qb-input-form").on("change", function (event) {
+        formInputs[$(event.target).attr("name")] = $(event.target).val();
+    });
+
+    $("#qb-input-form").on("submit", async function (event) {
+        if (event != null) {
+            event.preventDefault();
+        }
+        let formData = $("#qb-input-form").serializeArray();
+
+        formData.forEach((item, index) => {
+            formInputs[item.name] = item.value;
+        });
+
+        await $.post(
+            `https://${GetParentResourceName()}/buttonSubmit`,
+            JSON.stringify({ data: formInputs })
+        );
+        CloseMenu();
+    });
 };
 
-function SetButton(button) {
-    var buttonText = button ? button : 'Submit'
-    $('.btn').html(buttonText);
+const renderTextInput = (item) => {
+    const { text, name } = item;
+    formInputs[name] = "";
+    const isRequired = item.isRequired == "true" || item.isRequired ? 'required' : '';
+
+    return ` <input placeholder="${text}" type="text" class="form-control" name="${name}" ${isRequired}/>`;
+};
+
+const renderNumberInput = (item) => {
+    try {
+        const { text, name } = item;
+        formInputs[name] = "";
+        const isRequired = item.isRequired == "true" || item.isRequired ? 'required' : '';
+
+        return `<input placeholder="${text}" type="number" class="form-control" name="${name}" ${isRequired}/>`;
+    } catch (err) {
+        console.log(err);
+        return "";
+    }
+};
+
+const renderRadioInput = (item) => {
+    const { options, name, text } = item;
+    formInputs[name] = options[0].value;
+
+    let div = `<div class="form-input-group"> <div class="form-group-title">${text}</div>`;
+    div += '<div class="input-group">';
+    options.forEach((option, index) => {
+        div += `<label for="radio_${name}_${index}"> <input type="radio" id="radio_${name}_${index}" name="${name}" value="${
+            option.value
+        }" ${index == 0 ? "checked" : ""}> ${option.text}</label>`;
+    });
+
+    div += "</div>";
+    div += "</div>";
+    return div;
+};
+
+const renderCheckboxInput = (item) => {
+    const { options, name, text } = item;
+    formInputs[name] = options[0].value;
+
+    let div = `<div class="form-input-group"> <div class="form-group-title">${text}</div>`;
+    div += '<div class="input-group-chk">';
+
+    options.forEach((option, index) => {
+        div += `<label for="chk_${name}_${index}">${option.text} <input type="checkbox" id="chk_${name}_${index}" name="${name}" value="${option.value}"></label>`;
+    });
+
+    div += "</div>";
+    div += "</div>";
+    return div;
+};
+
+const renderSelectInput = (item) => {
+    const { options, name, text } = item;
+    let div = `<select class="form-select" name="${name}" title="${text}">`;
+    formInputs[name] = options[0].value;
+
+    options.forEach((option, index) => {
+        div += `<option value="${option.value}" ${
+            option.checked != null ? "checked" : ""
+        }>${option.text}</option>`;
+    });
+    div += "</select>";
+    return div;
 };
 
 const CloseMenu = () => {
     $(`.main-wrapper`).fadeOut(0);
-    $(saved).remove();
-    RowsData = [];
-    Rows = [];
-    saved = "";
+    $("#qb-input-form").remove();
+    formInputs = {};
 };
 
-function AddRow(data) {
-    RowsData = data
-    for (var i = 0; i < RowsData.length; i++) {
-        var message = RowsData[i].txt
-        var id = RowsData[i].id
-        var element
-
-        element = $('<input placeholder ="' + message + '" type="text" ="form-control" id="' + id + '" class/>');
-        $('.body').append(element);
-        Rows[id] = element
-    }
-    setTimeout(() => {
-        document.getElementById(0).focus();
-    }, 100);
-}
-
-$(`#submit`).click(() => {
-    SubmitData();
-})
-
-function SubmitData() {
-    const returnData = [];
-    for (var i = 0; i < RowsData.length; i++) {
-        var id = RowsData[i].id
-        var data = document.getElementById(id)
-        if (data.value) {
-            returnData.push({
-                _id: id,
-                input: data.value,
-            });
-        } else {
-            returnData.push({
-                _id: id,
-                input: null,
-            });
-        }
-        $(Rows[id]).remove();
-    }
-    PostData({
-        data: returnData
-    })
-    CloseMenu();
-}
-
-const PostData = (data) => {
-    return $.post(`https://${GetParentResourceName()}/buttonSubmit`, JSON.stringify(data))
-}
-
 const CancelMenu = () => {
-    for (var i = 0; i < RowsData.length; i++) {
-        var id = RowsData[i].id
-        $(Rows[id]).remove();
-    }
-    $.post(`https://${GetParentResourceName()}/closeMenu`)
+    $.post(`https://${GetParentResourceName()}/closeMenu`);
     return CloseMenu();
-}
+};
 
 window.addEventListener("message", (event) => {
-    const data = event.data
-    const info = data.data
-    const action = data.action
+    const data = event.data;
+    const info = data.data;
+    const action = data.action;
     switch (action) {
         case "OPEN_MENU":
             return OpenMenu(info);
@@ -98,21 +159,24 @@ window.addEventListener("message", (event) => {
         default:
             return;
     }
-})
+});
 
 document.onkeyup = function (event) {
     const charCode = event.key;
-    if (charCode == 'Escape') {
+    if (charCode == "Escape") {
         CancelMenu();
-    } else if (charCode == 'Enter') {
-        SubmitData()
+    } else if (charCode == "Enter") {
+        SubmitData();
     }
 };
 
+// IDK why this is a thing ? what if they misclick?
 $(document).click(function (event) {
     var $target = $(event.target);
-    if (!$target.closest('.main-wrapper').length &&
-        $('.main-wrapper').is(":visible")) {
+    if (
+        !$target.closest(".main-wrapper").length &&
+        $(".main-wrapper").is(":visible")
+    ) {
         CancelMenu();
     }
 });
