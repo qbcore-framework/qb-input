@@ -23,6 +23,9 @@ const OpenMenu = (data) => {
             case "number":
                 form.push(renderNumberInput(item));
                 break;
+            case "password":
+                form.push(renderPasswordInput(item));
+                break;
             case "radio":
                 form.push(renderRadioInput(item));
                 break;
@@ -89,6 +92,14 @@ const renderNumberInput = (item) => {
         console.log(err);
         return "";
     }
+};
+const renderPasswordInput = (item) => {
+    const { text, name } = item;
+    formInputs[name] = "";
+    const isRequired =
+        item.isRequired == "true" || item.isRequired ? "required" : "";
+
+    return ` <input placeholder="${text}" type="password" class="form-control" name="${name}" ${isRequired}/>`;
 };
 
 const renderRadioInput = (item) => {
