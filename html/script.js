@@ -20,11 +20,11 @@ const OpenMenu = (data) => {
             case "text":
                 form.push(renderTextInput(item));
                 break;
-            case "number":
-                form.push(renderNumberInput(item));
-                break;
             case "password":
                 form.push(renderPasswordInput(item));
+                break;
+            case "number":
+                form.push(renderNumberInput(item));
                 break;
             case "radio":
                 form.push(renderRadioInput(item));
@@ -79,7 +79,14 @@ const renderTextInput = (item) => {
 
     return ` <input placeholder="${text}" type="text" class="form-control" name="${name}" ${isRequired}/>`;
 };
+const renderPasswordInput = (item) => {
+    const { text, name } = item;
+    formInputs[name] = "";
+    const isRequired =
+        item.isRequired == "true" || item.isRequired ? "required" : "";
 
+    return ` <input placeholder="${text}" type="password" class="form-control" name="${name}" ${isRequired}/>`;
+};
 const renderNumberInput = (item) => {
     try {
         const { text, name } = item;
@@ -92,14 +99,6 @@ const renderNumberInput = (item) => {
         console.log(err);
         return "";
     }
-};
-const renderPasswordInput = (item) => {
-    const { text, name } = item;
-    formInputs[name] = "";
-    const isRequired =
-        item.isRequired == "true" || item.isRequired ? "required" : "";
-
-    return ` <input placeholder="${text}" type="password" class="form-control" name="${name}" ${isRequired}/>`;
 };
 
 const renderRadioInput = (item) => {

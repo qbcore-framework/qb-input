@@ -75,7 +75,8 @@ body {
     -webkit-appearance: none;
 }
 .form-control[type="text"],
-.form-control[type="number"] {
+.form-control[type="number"],
+.form-control[type="password"] {
     border: none;
     font-size: 14px;
     border-radius: 5px;
@@ -87,7 +88,8 @@ body {
 }
 
 .form-control[type="text"]:focus,
-.form-control[type="number"]:focus {
+.form-control[type="number"]:focus,
+.form-control[type="password"]:focus {
     transition-property: box-shadow;
     transition-duration: 0.25s;
     transition-timing-function: linear, ease-in;
