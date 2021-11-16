@@ -18,13 +18,13 @@ RegisterCommand('testinput', function()
                 text = "Citizen ID (#)", -- text you want to be displayed as a place holder
                 name = "citizenid", -- name of the input should be unique otherwise it might override
                 type = "text", -- type of the input
-                isRequired = true -- Optional [accepted values: true | false] but will not submit the form if no value is inputted
+                isRequired = true -- Optional [accepted values: true | false] but will submit the form if no value is inputted
             },
             {
                 text = "Bill Price ($)", -- text you want to be displayed as a place holder
                 name = "billprice", -- name of the input should be unique otherwise it might override
                 type = "number", -- type of the input - number will not allow non-number characters in the field so only accepts 0-9
-                isRequired = false -- Optional [accepted values: true | false] but will not submit the form if no value is inputted
+                isRequired = false -- Optional [accepted values: true | false] but will submit the form if no value is inputted
             },
             {
                 text = "Bill Type", -- text you want to be displayed as a input header
