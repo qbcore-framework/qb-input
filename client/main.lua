@@ -27,7 +27,7 @@ function ShowInput(data)
         data = data
     })
 
-    return Await(properties)
+    return Citizen.Await(properties)
 end
 
 exports("ShowInput", ShowInput)
