@@ -9,7 +9,7 @@ const OpenMenu = (data) => {
     $(`.main-wrapper`).fadeIn(0);
 
     let form = [
-        "<form id='qb-input-form'>",
+		`<form id='${data.formID != null ? data.formID : "qb-input-form"}'>`,
         `<div class="heading">${
             data.header != null ? data.header : "Form Title"
         }</div>`,
@@ -77,7 +77,7 @@ const renderTextInput = (item) => {
     const isRequired =
         item.isRequired == "true" || item.isRequired ? "required" : "";
 
-    return ` <input placeholder="${text}" type="text" class="form-control" name="${name}" ${isRequired}/>`;
+    return ` <input placeholder="${text}" type="text" class="form-control" name="${name}" id="${id}" ${isRequired}/>`;
 };
 const renderPasswordInput = (item) => {
     const { text, name } = item;
