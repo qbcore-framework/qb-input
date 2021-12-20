@@ -7,10 +7,16 @@ const OpenMenu = (data) => {
     }
 
     $(`.main-wrapper`).fadeIn(0);
-
+	
+	const formID = data.formID != null ? data.formID : "qb-input-form";
+	const formClass = data.formClass != null ? data.formClass : "qb-input-form";
+	const footerClass = data.footerClass != null ? data.footerClass : "footer";
+	const headerClass = data.headerClass != null ? data.headerClass : "heading";
+	const submitClass = data.submitClass != null ? data.submitClass : "btn btn-success";
+	
     let form = [
-        "<form id='qb-input-form'>",
-        `<div class="heading">${
+		`<form id='formID' class='${formClass}'>`,
+        `<div class="${headerClass}">${
             data.header != null ? data.header : "Form Title"
         }</div>`,
     ];
@@ -40,7 +46,8 @@ const OpenMenu = (data) => {
         }
     });
     form.push(
-        `<div class="footer"><button type="submit" class="btn btn-success" id="submit">${
+	
+        `<div class="${footerClass}"><button type="submit" class="${submitClass}" id="submit">${
             data.submitText ? data.submitText : "Submit"
         }</button></div>`
     );
@@ -76,16 +83,18 @@ const renderTextInput = (item) => {
     formInputs[name] = "";
     const isRequired =
         item.isRequired == "true" || item.isRequired ? "required" : "";
+	const inputClass = item.inputClass != null ? item.inputClass : "form-control";
 
-    return ` <input placeholder="${text}" type="text" class="form-control" name="${name}" ${isRequired}/>`;
+    return ` <input placeholder="${text}" type="text" class="${inputClass}" name="${name}" ${isRequired}/>`;
 };
 const renderPasswordInput = (item) => {
     const { text, name } = item;
     formInputs[name] = "";
     const isRequired =
         item.isRequired == "true" || item.isRequired ? "required" : "";
+	const inputClass = item.inputClass != null ? item.inputClass : "form-control";
 
-    return ` <input placeholder="${text}" type="password" class="form-control" name="${name}" ${isRequired}/>`;
+    return ` <input placeholder="${text}" type="password" class="f${inputClass}" name="${name}" ${isRequired}/>`;
 };
 const renderNumberInput = (item) => {
     try {
@@ -93,8 +102,9 @@ const renderNumberInput = (item) => {
         formInputs[name] = "";
         const isRequired =
             item.isRequired == "true" || item.isRequired ? "required" : "";
+		const inputClass = item.inputClass != null ? item.inputClass : "form-control";
 
-        return `<input placeholder="${text}" type="number" class="form-control" name="${name}" ${isRequired}/>`;
+        return `<input placeholder="${text}" type="number" class="${inputClass}" name="${name}" ${isRequired}/>`;
     } catch (err) {
         console.log(err);
         return "";
@@ -104,9 +114,12 @@ const renderNumberInput = (item) => {
 const renderRadioInput = (item) => {
     const { options, name, text } = item;
     formInputs[name] = options[0].value;
+	const divGroupClass = item.divGroupClass != null ? item.divGroupClass : "form-input-group";
+	const divGroupTitleClass = item.divGroupTitleClass != null ? item.divGroupTitleClass : "select-title";
+	const divInputGroupClass = item.divInputGroupClass != null ? item.divInputGroupClass : "input-group";
 
-    let div = `<div class="form-input-group"> <div class="form-group-title">${text}</div>`;
-    div += '<div class="input-group">';
+    let div = `<div class="${divGroupClass}"> <div class="${divGroupTitleClass}">${text}</div>`;
+    div += `<div class="${divInputGroupClass}">`;
     options.forEach((option, index) => {
         div += `<label for="radio_${name}_${index}"> <input type="radio" id="radio_${name}_${index}" name="${name}" value="${
             option.value
@@ -121,8 +134,11 @@ const renderRadioInput = (item) => {
 const renderCheckboxInput = (item) => {
     const { options, name, text } = item;
     formInputs[name] = options[0].value;
+	const divGroupClass = item.divGroupClass != null ? item.divGroupClass : "form-input-group";
+	const divGroupTitleClass = item.divGroupTitleClass != null ? item.divGroupTitleClass : "select-title";
+	const divInputGroupClass = item.divInputGroupClass != null ? item.divInputGroupClass : "input-group";
 
-    let div = `<div class="form-input-group"> <div class="form-group-title">${text}</div>`;
+    let div = `<div class="${divGroupClass}""> <div class="${divGroupTitleClass}">${text}</div>`;
     div += '<div class="input-group-chk">';
 
     options.forEach((option, index) => {
@@ -136,9 +152,11 @@ const renderCheckboxInput = (item) => {
 
 const renderSelectInput = (item) => {
     const { options, name, text } = item;
-    let div = `<div class="select-title">${text}</div>`;
+	const divSelectTitle = item.divSelectTitle != null ? item.divSelectTitle : "select-title";
+	const divformSelect = item.divformSelect != null ? item.divformSelect : "form-select";
+    let div = `<div class="${divSelectTitle}">${text}</div>`;
 
-    div += `<select class="form-select" name="${name}" title="${text}">`;
+    div += `<select class="${divformSelect}" name="${name}" title="${text}">`;
     formInputs[name] = options[0].value;
 
     options.forEach((option, index) => {
