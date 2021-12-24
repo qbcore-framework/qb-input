@@ -1,4 +1,5 @@
 let formInputs = {};
+const formID = "";
 
 const OpenMenu = (data) => {
     if (data == null || data == "") {
@@ -9,13 +10,13 @@ const OpenMenu = (data) => {
     $(`.main-wrapper`).fadeIn(0);
 	
 	const formID = data.formID != null ? data.formID : "qb-input-form";
-	const formClass = data.formClass != null ? data.formClass : "qb-input-form";
+	const formClass = data.formClass != null ? data.formClass : "q1b-input-form";
 	const footerClass = data.footerClass != null ? data.footerClass : "footer";
 	const headerClass = data.headerClass != null ? data.headerClass : "heading";
 	const submitClass = data.submitClass != null ? data.submitClass : "btn btn-success";
 	
     let form = [
-		`<form id='formID' class='${formClass}'>`,
+		`<form id='${formID}' class='${formClass}'>`,
         `<div class="${headerClass}">${
             data.header != null ? data.header : "Form Title"
         }</div>`,
@@ -56,15 +57,16 @@ const OpenMenu = (data) => {
 
     $(".main-wrapper").html(form.join(" "));
 
-    $("#qb-input-form").on("change", function (event) {
+    $(formID).on("change", function (event) {
         formInputs[$(event.target).attr("name")] = $(event.target).val();
     });
 
-    $("#qb-input-form").on("submit", async function (event) {
+    $("#" + formID).on("submit", async function (event) {
+		
         if (event != null) {
             event.preventDefault();
         }
-        let formData = $("#qb-input-form").serializeArray();
+        let formData = $("#" + formID).serializeArray();
 
         formData.forEach((item, index) => {
             formInputs[item.name] = item.value;
@@ -170,7 +172,7 @@ const renderSelectInput = (item) => {
 
 const CloseMenu = () => {
     $(`.main-wrapper`).fadeOut(0);
-    $("#qb-input-form").remove();
+    $(formID).remove();
     formInputs = {};
 };
 
