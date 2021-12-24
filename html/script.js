@@ -10,7 +10,7 @@ const OpenMenu = (data) => {
     $(`.main-wrapper`).fadeIn(0);
 	
 	const formID = data.formID != null ? data.formID : "qb-input-form";
-	const formClass = data.formClass != null ? data.formClass : "q1b-input-form";
+	const formClass = data.formClass != null ? data.formClass : "qb-input-form";
 	const footerClass = data.footerClass != null ? data.footerClass : "footer";
 	const headerClass = data.headerClass != null ? data.headerClass : "heading";
 	const submitClass = data.submitClass != null ? data.submitClass : "btn btn-success";
