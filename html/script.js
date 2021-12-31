@@ -15,7 +15,7 @@ const OpenMenu = (data) => {
 	const submitClass = data.submitClass != null ? data.submitClass : "btn btn-success";
 	
     let form = [
-		`<form id='formID' class='${formClass}'>`,
+		`<form id='${formID}' class='${formClass}'>`,
         `<div class="${headerClass}">${
             data.header != null ? data.header : "Form Title"
         }</div>`,
