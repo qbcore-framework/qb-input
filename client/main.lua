@@ -31,3 +31,7 @@ function ShowInput(data)
 end
 
 exports("ShowInput", ShowInput)
+
+RegisterNetEvent('qb-input:client:showInput', function(data))
+    ShowInput(data)
+end)
