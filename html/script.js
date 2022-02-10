@@ -50,19 +50,18 @@ const OpenMenu = (data) => {
     $(".main-wrapper").html(form.join(" "));
 
     $("#qb-input-form").on("change", function (event) {
-        formInputs[$(event.target).attr("name")] = $(event.target).val();
+        if( $(event.target).attr("type") == 'checkbox' ) {
+            const value = $(event.target).is(":checked") ? "true" : "false";
+            formInputs[$(event.target).attr("value")] = value;
+        }else{
+            formInputs[$(event.target).attr("name")] = $(event.target).val();
+        }
     });
 
     $("#qb-input-form").on("submit", async function (event) {
         if (event != null) {
             event.preventDefault();
         }
-        let formData = $("#qb-input-form").serializeArray();
-
-        formData.forEach((item, index) => {
-            formInputs[item.name] = item.value;
-        });
-
         await $.post(
             `https://${GetParentResourceName()}/buttonSubmit`,
             JSON.stringify({ data: formInputs })
@@ -120,13 +119,14 @@ const renderRadioInput = (item) => {
 
 const renderCheckboxInput = (item) => {
     const { options, name, text } = item;
-    formInputs[name] = options[0].value;
+
 
     let div = `<div class="form-input-group"> <div class="form-group-title">${text}</div>`;
     div += '<div class="input-group-chk">';
 
     options.forEach((option, index) => {
         div += `<label for="chk_${name}_${index}">${option.text} <input type="checkbox" id="chk_${name}_${index}" name="${name}" value="${option.value}"></label>`;
+        formInputs[option.value] = 'false';
     });
 
     div += "</div>";
