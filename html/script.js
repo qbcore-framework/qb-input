@@ -120,7 +120,6 @@ const renderCheckboxInput = (item) => {
     div += '<div class="input-group-chk">';
 
     options.forEach((option, index) => {
-        console.log(option)
         div += `<label for="chk_${name}_${index}">${option.text} <input type="checkbox" id="chk_${name}_${index}" name="${name}" value="${option.value}" ${option.checked ? 'checked' : ''}></label>`;
         formInputs[option.value] = option.checked ? 'true' : 'false';
     });
