@@ -133,7 +133,7 @@ body {
 .select-title {
     background: rgba(23, 23, 23, 90%);
     box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
-    margin-top: 5px;
+    margin: 5px 0px;
     padding: 5px;
     border-radius: 5px;
     text-align: center;
@@ -156,11 +156,15 @@ body {
     width: 100%;
     background: rgba(23, 23, 23, 90%);
     box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
-    margin-top: 5px;
+    margin-top: 2.5px;
     margin-bottom: 10px;
     padding: 5px;
     border-radius: 5px;
     border: none;
+}
+
+.form-select:focus-visible {
+    outline: unset;
 }
 
 .form-select option:hover {
