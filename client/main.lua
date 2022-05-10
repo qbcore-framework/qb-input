@@ -7,7 +7,7 @@ RegisterNUICallback("buttonSubmit", function(data, cb)
     cb("ok")
 end)
 
-RegisterNUICallback("closeMenu", function(data, cb)
+RegisterNUICallback("closeMenu", function(_, cb)
     SetNuiFocus(false)
     properties:resolve(nil)
     properties = nil
