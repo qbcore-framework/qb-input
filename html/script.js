@@ -53,6 +53,29 @@ const OpenMenu = (data) => {
             formInputs[$(event.target).attr("name")] = $(event.target).val();
         }
     });
+    
+    $("#qb-input-form").keypress(function(event){
+        var charCode = (event.which) ? event.which : event.keyCode
+        if( $(event.target).attr("type") == 'number' ) {
+            if(charCode == 46)	
+            {   	
+                //disallow ".(dot) " it expolite item quantity like 10.009 etc. 
+                //and when item quantity is less than 1 this item not removed from inventry but it usable with infinite usase
+                $(event.target).val(""); 
+                CancelMenu();
+                return false;	
+            }	
+            if (charCode < 48 || charCode > 57)	
+            {	//disallow all non numbaric
+                return false;	
+            }	
+            else	
+            {	
+                //allow on 0-9
+                return true;	
+            }	
+        }
+      });
 
     $("#qb-input-form").on("submit", async function (event) {
         if (event != null) {
