@@ -227,3 +227,11 @@ body {
 .btn:hover {
     background-color: #228a3a;
 }
+
+.label {
+    background: rgba(23, 23, 23, 90%); 
+    padding: 10px;   
+    border-radius:5px;
+    font-size: 14px;
+    margin: 5px 0px;
+}
