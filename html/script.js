@@ -34,7 +34,7 @@ const OpenMenu = (data) => {
                 form.push(renderCheckboxInput(item));
                 break;
             default:
-                form.push(`<div>${item.text}</div>`);
+                form.push(`<div class="label">${item.text}</div>`);
         }
     });
     form.push(
