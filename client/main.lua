@@ -1,15 +1,15 @@
 local properties = nil
 
 AddEventHandler('onResourceStart', function(resourceName)
-    if (GetCurrentResourceName() ~= resourceName) then
-      return
+    if GetCurrentResourceName() ~= resourceName then
+        return
     end
     Wait(1000)
     SendNUIMessage({
         action = "SET_STYLE",
         data = Config.Style
     })
-  end)
+end)
 
 RegisterNUICallback("buttonSubmit", function(data, cb)
     SetNuiFocus(false)
