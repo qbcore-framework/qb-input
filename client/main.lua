@@ -1,5 +1,16 @@
 local properties = nil
 
+AddEventHandler('onResourceStart', function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then
+        return
+    end
+    Wait(1000)
+    SendNUIMessage({
+        action = "SET_STYLE",
+        data = Config.Style
+    })
+end)
+
 RegisterNUICallback("buttonSubmit", function(data, cb)
     SetNuiFocus(false)
     properties:resolve(data.data)
@@ -14,7 +25,7 @@ RegisterNUICallback("closeMenu", function(_, cb)
     cb("ok")
 end)
 
-function ShowInput(data)
+local function ShowInput(data)
     Wait(150)
     if not data then return end
     if properties then return end

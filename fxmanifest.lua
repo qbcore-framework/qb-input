@@ -4,12 +4,15 @@ game 'gta5'
 description 'QB-Input'
 version '0.0.1'
 
-client_script 'client/main.lua'
+client_scripts {
+    'client/*.lua'
+}
+
 ui_page 'html/index.html'
 
 files {
     'html/index.html',
-    'html/style.css',
+    'html/styles/*.css',
     'html/script.js'
 }
 
