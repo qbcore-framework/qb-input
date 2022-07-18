@@ -82,6 +82,14 @@ RegisterCommand('testinput', function()
 end, false)
 ```
 
+## Contributing Custom Styles
+
+- Create a copy of `html/styles/default.css` and name it whatever you want for example `custom.css`
+- Make the desired changes
+- Test the changes out by setting `Config.Style = "custom"` and restarting the script
+- Once changes are finalized, set `Config.Style = "default"`
+- Create a Pull Request with the custom CSS
+
 ## License
 
     QBCore Framework
