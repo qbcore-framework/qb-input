@@ -11,6 +11,13 @@ AddEventHandler('onResourceStart', function(resourceName)
     })
 end)
 
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    SendNUIMessage({
+        action = "SET_STYLE",
+        data = Config.Style
+    })
+end)
+
 RegisterNUICallback("buttonSubmit", function(data, cb)
     SetNuiFocus(false)
     properties:resolve(data.data)
