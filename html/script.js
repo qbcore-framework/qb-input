@@ -181,12 +181,19 @@ window.addEventListener("message", (event) => {
     }
 });
 
-document.onkeyup = function (event) {
+document.onkeyup = async function (event) {
     const charCode = event.key;
     if (charCode == "Escape") {
         CancelMenu();
     } else if (charCode == "Enter") {
-        SubmitData();
+        if (event != null) {
+            event.preventDefault();
+        }
+        await $.post(
+            `https://${GetParentResourceName()}/buttonSubmit`,
+            JSON.stringify({ data: formInputs })
+        );
+        CloseMenu();
     }
 };
 
