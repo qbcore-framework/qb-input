@@ -89,7 +89,7 @@ const renderNumberInput = (item) => {
         const isRequired = item.isRequired == "true" || item.isRequired ? "required" : "";
         const defaultValue = item.default ? `value="${item.default}"` : ""
 
-        return `<input placeholder="${text}" type="number" class="form-control" name="${name}" ${defaultValue} ${isRequired}/>`;
+        return `<input placeholder="${text}" type="number" class="form-control" name="${name}" oninput="validity.valid||(value='');" min="1" ${defaultValue} ${isRequired}/>`;
     } catch (err) {
         console.log(err);
         return "";
