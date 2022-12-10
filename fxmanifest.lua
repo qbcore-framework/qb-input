@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'QB-Input'
-version '0.0.1'
+version '1.2.0'
 
 client_scripts {
     'client/*.lua'
