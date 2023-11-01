@@ -1,3 +1,2 @@
 Config = {}
-
-Config.Style = "default"
+Config.Style = 'default'

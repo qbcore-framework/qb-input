@@ -27,16 +27,16 @@ body {
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: #171717e6;
     border-radius: 10px;
 }
@@ -110,6 +110,31 @@ body {
     transition-property: box-shadow;
     transition-duration: 0.25s;
     transition-timing-function: linear, ease-in;
+}
+
+.form-control[type="color"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(23, 23, 23, 90%);
+    cursor: pointer;
+}
+
+.form-control[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.form-control[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+}
+
+.form-control[type="color"]:focus {
+    outline: none;
+    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000; /* Adding focus shadow */
 }
 
 .form-input-group {
@@ -229,9 +254,9 @@ body {
 }
 
 .label {
-    background: rgba(23, 23, 23, 90%); 
-    padding: 10px;   
-    border-radius:5px;
+    background: rgba(23, 23, 23, 90%);
+    padding: 10px;
+    border-radius: 5px;
     font-size: 14px;
     margin: 5px 0px;
 }
