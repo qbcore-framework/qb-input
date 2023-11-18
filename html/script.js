@@ -132,7 +132,8 @@ const renderSelectInput = (item) => {
 
     options.forEach((option, index) => {
         const isDefaultValue = item.default == option.value;
-        div += `<option value="${option.value}" ${isDefaultValue ? "selected" : ""}>${option.text}</option>`;
+        const bgColor = option.bgcolor ? `style="background-color: ${option.bgcolor}"` : false;
+        div += `<option value="${option.value}" ${isDefaultValue ? "selected" : ""} ${bgColor ? bgColor : ""}>${option.text}</option>`;
         if (isDefaultValue) {
             formInputs[name] = option.value;
         }
