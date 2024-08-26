@@ -179,7 +179,7 @@ window.addEventListener("message", (event) => {
         case "OPEN_MENU":
             return OpenMenu(info);
         case "CLOSE_MENU":
-            return CloseMenu();
+            return CancelMenu();
         default:
             return;
     }

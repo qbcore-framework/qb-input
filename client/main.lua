@@ -49,3 +49,11 @@ local function ShowInput(data)
 end
 
 exports('ShowInput', ShowInput)
+
+local function CloseInput()
+    SendNUIMessage({
+        action = 'CLOSE_MENU'
+    })
+end
+
+exports('CloseInput', CloseInput)
