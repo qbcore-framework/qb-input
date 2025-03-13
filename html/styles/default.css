@@ -1,11 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap");
+
+:root {
+    /* Dark Theme Colors (from styleguide.css) */
+    --md-primary: #f44336;
+    --md-on-primary: #ffffff;
+    --md-primary-container: #ffdad6;
+    --md-on-primary-container: #410002;
+    --md-secondary: #d32f2f;
+    --md-on-secondary: #ffffff;
+    --md-secondary-container: #ffdad5;
+    --md-on-secondary-container: #410001;
+    --md-tertiary: #ff8a65;
+    --md-on-tertiary: #ffffff;
+    --md-tertiary-container: #ffdacc;
+    --md-on-tertiary-container: #410002;
+    --md-surface: #1c1b1f;
+    --md-on-surface: #e6e1e5;
+    --md-surface-container-lowest: #0f0d13;
+    --md-surface-container-low: #1d1b20;
+    --md-surface-container: #211f26;
+    --md-surface-container-high: #2b2930;
+    --md-surface-container-highest: #36343b;
+    --md-error: #b3261e;
+    --md-on-error: #ffffff;
+    --md-error-container: #93000a;
+    --md-on-error-container: #ffdad5;
+    --md-outline: #79747e;
+    --md-outline-variant: #49454f;
+    --md-inverse-surface: #e6e1e5;
+    --md-inverse-on-surface: #1c1b1f;
+    --md-scrim: rgba(0, 0, 0, 0.6);
+    --md-shadow: rgba(0, 0, 0, 0.15);
+    --md-success: #9bd880;
+    --md-on-success: #193800;
+    --md-success-container: #275000;
+    --md-on-success-container: #b6f397;
+
+    /* Typography */
+    --md-typescale-body-large-size: 16px;
+    --md-typescale-body-medium-size: 14px;
+    --md-typescale-body-small-size: 12px;
+    --md-typescale-title-medium-size: 16px;
+    --md-typescale-headline-small-size: 24px;
+    --md-typescale-label-large-size: 14px;
+
+    /* Shapes */
+    --md-radius-small: 8px;
+    --md-radius-medium: 12px;
+    --md-radius-large: 16px;
+
+    /* Elevation */
+    --md-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --md-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+
+    /* Font */
+    --font-primary: "Exo 2", sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+}
 
 * {
     padding: 0;
     margin: 0;
-    font-family: "Poppins", sans-serif !important;
+    font-family: var(--font-primary) !important;
     font-weight: 300;
-    color: white;
+    color: var(--md-on-surface);
 }
 
 .root-wrapper {
@@ -31,14 +90,12 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 10px;
+    background: var(--md-surface-container-low);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #171717e6;
-    border-radius: 10px;
+    background: var(--md-surface-container-high);
 }
 
 .main-wrapper {
@@ -48,7 +105,6 @@ body {
     height: 80vh;
     position: relative;
     overflow: auto;
-    border-radius: 5%;
     padding: 1.5rem;
     display: none;
 }
@@ -58,19 +114,19 @@ body {
     justify-content: center;
     overflow: wrap;
     margin-bottom: 5px;
-    background: rgba(23, 23, 23, 90%);
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
-    border-radius: 5px;
-    color: white;
-    font-size: 0.9rem;
-    font-weight: 400;
+    background: var(--md-surface-container);
+    box-shadow: var(--md-elevation-1);
+    color: var(--md-on-surface);
+    font-size: var(--md-typescale-body-medium-size);
+    font-weight: var(--font-weight-regular);
     padding: 0.45rem;
 }
 
 .heading h1 {
-    font-size: 18px;
+    font-size: var(--md-typescale-headline-small-size);
     position: relative;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
+    font-family: var(--font-primary) !important;
 }
 
 .form {
@@ -85,20 +141,21 @@ body {
 
 .form label {
     margin-top: 24px;
+    font-family: var(--font-primary) !important;
 }
 
 .form-control[type="number"] {
     appearance: none;
     -webkit-appearance: none;
 }
+
 .form-control[type="text"],
 .form-control[type="number"],
 .form-control[type="password"] {
     border: none;
-    font-size: 14px;
-    border-radius: 5px;
+    font-size: var(--md-typescale-body-medium-size);
     margin: 5px 0px;
-    background: rgba(23, 23, 23, 90%);
+    background: var(--md-surface-container);
     height: 50px;
     text-align: center;
     width: 100%;
@@ -110,6 +167,8 @@ body {
     transition-property: box-shadow;
     transition-duration: 0.25s;
     transition-timing-function: linear, ease-in;
+    outline: none;
+    box-shadow: 0 0 0 2px var(--md-outline);
 }
 
 .form-control[type="color"] {
@@ -118,8 +177,7 @@ body {
     width: 100%;
     height: 50px;
     border: none;
-    border-radius: 5px;
-    background: rgba(23, 23, 23, 90%);
+    background: var(--md-surface-container);
     cursor: pointer;
 }
 
@@ -129,21 +187,19 @@ body {
 
 .form-control[type="color"]::-webkit-color-swatch {
     border: none;
-    border-radius: 5px;
 }
 
 .form-control[type="color"]:focus {
     outline: none;
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000; /* Adding focus shadow */
+    box-shadow: 0 0 0 2px var(--md-outline);
 }
 
 .form-input-group {
-    background: rgba(23, 23, 23, 90%);
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    background: var(--md-surface-container);
+    box-shadow: var(--md-elevation-1);
     margin-top: 5px;
     margin-bottom: 10px;
     padding: 5px;
-    border-radius: 5px;
 }
 
 .input-group {
@@ -164,63 +220,71 @@ body {
 }
 
 .input-group label:checked {
-    color: rgba(255, 255, 255, 1) !important;
+    color: var(--md-on-surface) !important;
 }
 
 .form-group-title {
     width: 100%;
     text-align: center;
+    font-family: var(--font-primary) !important;
+    font-weight: var(--font-weight-medium);
 }
 
 .select-title {
-    background: rgba(23, 23, 23, 90%);
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    background: var(--md-surface-container);
+    box-shadow: var(--md-elevation-1);
     margin: 5px 0px;
     padding: 5px;
-    border-radius: 5px;
     text-align: center;
+    font-family: var(--font-primary) !important;
 }
 
 .form-select {
     width: 100%;
-    background: rgba(23, 23, 23, 90%);
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    background: var(--md-surface-container);
+    box-shadow: var(--md-elevation-1);
     margin-top: 2.5px;
     margin-bottom: 10px;
     padding: 5px;
-    border-radius: 5px;
     border: none;
     height: 50px;
+    color: var(--md-on-surface);
+    font-size: var(--md-typescale-body-medium-size);
 }
 
 .form-select:active,
 .form-select:focus {
     width: 100%;
-    background: rgba(23, 23, 23, 90%);
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    background: var(--md-surface-container-high);
+    box-shadow: var(--md-elevation-1);
     margin-top: 2.5px;
     margin-bottom: 10px;
     padding: 5px;
-    border-radius: 5px;
     border: none;
+    outline: none;
 }
 
 .form-select:focus-visible {
-    outline: unset;
+    outline: none;
+    box-shadow: 0 0 0 2px var(--md-outline);
+}
+
+.form-select option {
+    background: var(--md-surface-container);
+    color: var(--md-on-surface);
 }
 
 .form-select option:hover {
-    background: rgba(23, 23, 23, 90%);
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    background: var(--md-surface-container-high);
+    box-shadow: var(--md-elevation-1);
     padding: 1rem 0;
-    border-radius: 5px;
     border: none;
     appearance: none;
 }
 
 ::placeholder {
     opacity: 65%;
-    color: white;
+    color: var(--md-on-surface);
 }
 
 .background {
@@ -229,7 +293,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.452);
+    background-color: var(--md-scrim);
     z-index: -99;
     display: none;
 }
@@ -237,26 +301,28 @@ body {
 .btn {
     width: 100%;
     height: 50px;
-    font-size: 16px;
-    background: rgba(23, 23, 23, 90%);
-    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    font-size: var(--md-typescale-title-medium-size);
+    background: var(--md-surface-container);
+    box-shadow: var(--md-elevation-1);
     border: none;
-    font-weight: 500;
-    border-radius: 5px;
+    font-weight: var(--font-weight-medium);
+    font-family: var(--font-primary) !important;
     transition-property: color, background-color;
     transition-duration: 0.1s, 0.3s;
     transition-timing-function: linear, ease-in;
     margin-top: 5px;
+    color: var(--md-on-surface);
 }
 
 .btn:hover {
-    background-color: #228a3a;
+    background-color: var(--md-success-container);
+    color: var(--md-on-success-container);
 }
 
 .label {
-    background: rgba(23, 23, 23, 90%);
+    background: var(--md-surface-container);
     padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
+    font-size: var(--md-typescale-body-medium-size);
     margin: 5px 0px;
+    box-shadow: var(--md-elevation-1);
 }
