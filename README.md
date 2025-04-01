@@ -1,8 +1,32 @@
-# qb-input
+# QBCore Input
 
 NUI input system for QBCore
 
 This is a modified version of **[NH Keyboard](https://forum.cfx.re/t/no-longer-supported-standalone-nerohiro-s-keyboard-dynamic-nui-keyboard-input/2506326)** by **[NeroHiro](https://github.com/nerohiro)**
+
+## Input Types
+
+- Text
+- Password
+- Number
+- Radio
+- Checkbox
+- Select
+- Color
+
+\* All types must be in lowercase
+
+## Input fields
+
+| Name | Input Type | Description | Variable Type | Optional | Default Value |
+| ---- | ---------- | ----------- | ------------- | -------- |  ------------ |
+| text | All | Text displayed as placeholder/title | `string` | ❌ | ... |
+| name | All | Variable name in the result (also name of input) | `string` | ❌ | ... |
+| type | All | Input type | `string` | ✅ | `"text"` |
+| isRequired | All | Whether the input is required to be filled or not | `boolean` | ✅ | `false` |
+| default | All | Default input value | `string` | ✅ | `nil` |
+| options | Radio, Checkbox & Select | Different values that can be selected by the user | `{value: string, text: string}[]` | ❌ | ... |
+
 
 ## Example
 
